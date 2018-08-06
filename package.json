@@ -1,0 +1,22 @@
+{
+  "name": "simpleusermanager",
+  "version": "1.2.0",
+  "description": "Node module for manage user",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/baptiste333/simpleusermanager.git"
+  },
+  "author": "Ekazuki",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/baptiste333/simpleusermanager/issues"
+  },
+  "homepage": "https://github.com/baptiste333/simpleusermanager#readme",
+  "dependencies": {
+    "mysql": "^2.16.0"
+  }
+}
