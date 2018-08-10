@@ -41,15 +41,60 @@ exports.register = function(con, username, password, email, callback) {
   });
 }
 
-exports.addMoney = function(con, money, pid) {
-  id = con.escape(pid)
+exports.pay = function(con, money, sender, receiver, callback) {
+  var sql1 = "SELECT money FROM users WHERE id = " + con.escape(sender);
+
+  con.query(sql1, function(err, senderData, fields) {
+    if (err) throw err;
+    if (senderData[0] != undefined) {
+      if (senderData[0].money > money) {
+        var newSenderMoney = senderData[0].money - money;
+        setMoney(con, newSenderMoney, sender);
+        addMoney(con, money, receiver);
+        callback(undefined);
+      } else {
+        callback("Sender dosen't have enought money");
+      }
+    } else {
+      callback('User does not exist');
+    }
+    /*money = results[0].money + money;
+    setMoney(con, money, id);
+    setMoney(con, money, )*/
+  });
+}
+exports.getUserIdByUsername = function(con, username, callback) {
+  username = con.escape(escapeHtml(username));
+  sql = "SELECT id FROM users WHERE username = " + username;
+  con.query(sql, function(err, results, fields) {
+    if (err) throw err;
+    if (results[0] != undefined) {
+      callback(undefined, results[0].id)
+    } else {
+      callback('User does not exist');
+    }
+  });
+}
+
+function addMoney(con, money, pid) {
+  id = con.escape(pid);
   sql = "SELECT money FROM users WHERE id = " + id;
   con.query(sql, function(err, results, fields) {
     if (err) throw err;
-    money = results[0].money + money;
+    money = parseInt(results[0].money) + parseInt(money);
     setMoney(con, money, id)
   });
 }
+
+exports.addMoney = function(con, money, pid) {
+  id = con.escape(pid);
+  sql = "SELECT money FROM users WHERE id = " + id;
+  con.query(sql, function(err, results, fields) {
+    if (err) throw err;
+    money = results[0].money.toString() + money.toString();
+    setMoney(con, money, id)
+  });
+};
 
 function setMoney(con, money, id) {
   sql = "UPDATE users SET money = " + con.escape(money) + " WHERE id = " + id;
