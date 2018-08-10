@@ -11,7 +11,7 @@ exports.login = function(con, username, password, callback) {
   con.query(sql, function(err, results, fields) {
       if (err) callback(err);
       if (results[0] == undefined) {
-        callback(err, "Username or login false");
+        callback(err, "Username or login wrong");
       } else {
         var data = results[0]
         callback(err, data);
@@ -58,9 +58,6 @@ exports.pay = function(con, money, sender, receiver, callback) {
     } else {
       callback('User does not exist');
     }
-    /*money = results[0].money + money;
-    setMoney(con, money, id);
-    setMoney(con, money, )*/
   });
 }
 exports.getUserIdByUsername = function(con, username, callback) {
