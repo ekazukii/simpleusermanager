@@ -1,6 +1,6 @@
 {
   "name": "simpleusermanager",
-  "version": "1.3.1",
+  "version": "1.3.2",
   "description": "Node module for manage user",
   "main": "index.js",
   "scripts": {
@@ -18,5 +18,12 @@
   "homepage": "https://github.com/baptiste333/simpleusermanager#readme",
   "dependencies": {
     "mysql": "^2.16.0"
-  }
+  },
+  "keywords": [
+    "User",
+    "Management",
+    "Usermanager",
+    "Mysql",
+    "Simple"
+  ]
 }
